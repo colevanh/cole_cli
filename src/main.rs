@@ -8,7 +8,7 @@ use parser::{*};
 #[derive(Parser, Debug)]
 #[command(version, about, long_about = None)]
 struct Args {
-    #[arg(short = 'i', long = "input")]
+    #[arg(short = 'i', long = "input", default_value = "-")]
     input: Option<String>,
 
     #[command(subcommand)]
@@ -30,19 +30,25 @@ enum Commands {
 fn main() -> Result<(), Box<dyn std::error::Error>> {
 
     let args = Args::parse();
-    let mut input_file_name: String = String::new();
+    let mut input_file_name: &String = &String::new();
     
-    if let Some(filename) = args.input {
+    if let Some(filename) = &args.input {
         input_file_name = filename;
     } else {
         panic!("terttt");
     }
+
+    let input_file = match open_file_or_error(&input_file_name) {
+        Ok(file) => file,
+        Err(_e) => panic!("File Not Found!")
+    };
     
-    match args.cmd {
+    match &args.cmd {
         Commands::Get{value} => println!("{value}"),
-        Commands::Set{key, value, is_true} => println!("reba"),
-        Commands::Print => print_lines_with_nums(File::open(input_file_name).unwrap()),
+        Commands::Set{key: _, value: _, is_true: _} => println!("reba"),
+        Commands::Print => print_lines_with_nums(input_file),
     }   
 
+   
     Ok(())
 }
