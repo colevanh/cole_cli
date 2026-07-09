@@ -4,6 +4,8 @@ use std::fs::{self, File};
 use std::io::{BufRead, BufReader,Result};
 use std::path::Path;
 
+
+
 #[allow(dead_code)]
 pub fn get_file_as_string(path: &Path) -> Result<String> {
     fs::read_to_string(path)
