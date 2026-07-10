@@ -2,7 +2,7 @@
 use std::fs::{self, File};
 use std::io::{self, BufRead, BufReader, Write};
 use std::path::Path;
-use anyhow::Result;
+use anyhow::{anyhow, Result};
 use serde;
 
 #[derive(serde::Deserialize)]
@@ -74,32 +74,36 @@ pub fn get_num_lines(file: File) -> Result<u32> {
 // TODO fix it
 #[allow(dead_code)]
 pub fn print_lines_with_nums(file: File) {
+    if let Err(err) = print_lines_with_nums_to_writer(file, &mut io::stdout()) {
+        eprintln!("failed to print lines: {err}");
+    }
+}
+
+pub fn print_lines_with_nums_to_writer<W: Write>(file: File, writer: &mut W) -> Result<()> {
     let my_bufreader = BufReader::new(file);
     let mut bufreader_iterator = my_bufreader.lines().enumerate().peekable();
-    
+
     while let Some(line_result) = bufreader_iterator.next() {
         let line = match line_result {
-            (num, Ok(good_line)) => (num+1, good_line),
-            (_, Err(_e)) => panic!("bummer bro"),
+            (_, Ok(good_line)) => good_line,
+            (_, Err(_)) => return Err(anyhow!("failed to read a line from the input file")),
         };
-        
-        if !line.1.is_empty() {
-            let new_string = line.1.replace('"', "");
-                match bufreader_iterator.peek() {
-                    Some(_) =>  println!("{}", new_string.trim()),
-                    None => print!("{}", new_string.trim()),
-                };
-            io::stdout().flush();
-        } else {
-            match bufreader_iterator.peek() {
-                Some(_) =>  println!(""),
-                None => print!(""),
-            };
-            io::stdout().flush();
-        }
-        
-    }   
 
+        let rendered = line.replace('"', "").trim().to_string();
+
+        if bufreader_iterator.peek().is_some() {
+            if rendered.is_empty() {
+                writeln!(writer)?;
+            } else {
+                writeln!(writer, "{rendered}")?;
+            }
+        } else if !rendered.is_empty() {
+            write!(writer, "{rendered}")?;
+        }
+    }
+
+    writer.flush()?;
+    Ok(())
 }
 
 
