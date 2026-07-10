@@ -49,6 +49,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         Commands::Print => print_lines_with_nums(input_file),
     }   
 
+    
    
     Ok(())
 }

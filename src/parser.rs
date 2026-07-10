@@ -1,14 +1,36 @@
 //NOTE eventually this file will strictly be for parsing a file, not necessarily making operations on it
-
 use std::fs::{self, File};
-use std::io::{self, BufRead, BufReader, Error, Result, Write, stdout};
+use std::io::{self, BufRead, BufReader, Write};
 use std::path::Path;
+use anyhow::Result;
+use serde;
 
+#[derive(serde::Deserialize)]
+pub struct Config {
+    //input_file: File,
+    //config_file: File,
+    //root_dir: Path,
+}
 
+impl Config {
+    pub fn load_from_file(path: &str) -> Result<Config> {
+        let file_content = fs::read_to_string(path)?;
+        let config: Config = toml::from_str(&file_content).expect("crap"); //todo remove "crap"
+        Ok(config)
+    }
+
+    pub fn default() -> Config {
+        // Return sensible defaults
+        Config { /* defaults */}
+    }
+}
+
+// ? better to use Paths or Strings for reading a file from cold start
+// ? I imagine it would be &str
 // Wrapper for read_to_string
 #[allow(dead_code)]
 pub fn get_file_as_string(path: &Path) -> Result<String> {
-    fs::read_to_string(path)
+    Ok(fs::read_to_string(path)?,)
 }
 
 // Helper method for opening a file via Result propagation
@@ -17,6 +39,15 @@ pub fn open_file_or_error(file_name: &str) -> Result<File> {
     let file_path = Path::new(file_name);
     let my_file = File::open(file_path)?;
     Ok(my_file)
+}
+
+
+fn get_test_file(name: &str) -> String {
+    Path::new(env!("CARGO_MANIFEST_DIR"))
+        .join("tests/data")
+        .join(name)
+        .to_string_lossy()
+        .into_owned()
 }
 
 // Count the lines in a file 
@@ -40,9 +71,7 @@ pub fn get_num_lines(file: File) -> Result<u32> {
     Ok(num_lines)
 }
 
-// TODO
-// Got distracted when trying to make tests worked. Come back and make this function
-// like it did originally
+// TODO fix it
 #[allow(dead_code)]
 pub fn print_lines_with_nums(file: File) {
     let my_bufreader = BufReader::new(file);
