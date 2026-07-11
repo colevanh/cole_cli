@@ -1,6 +1,6 @@
 use clap::{Parser, Subcommand};
-use std::{fs::File, path::Path};
-use std::env::current_dir;
+// use std::{fs::File, path::Path};
+// use std::env::current_dir;
 mod parser;
 
 use parser::{*};
@@ -11,9 +11,24 @@ struct Args {
     #[arg(short = 'i', long = "input", default_value = "-")]
     input: Option<String>,
 
+    #[arg(
+        short = 'n', 
+        long = "name", 
+        help = "The user's first name"
+    )]
+    name: String,
+
+    #[arg(
+        short = 'e', 
+        long = "email", 
+        help = "The user's email address"
+    )]
+    email: String,
+
     #[command(subcommand)]
     cmd: Commands
 }
+
 
 #[derive(Subcommand, Debug, Clone)]
 enum Commands {

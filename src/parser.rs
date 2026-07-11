@@ -12,6 +12,7 @@ pub struct Config {
     //root_dir: Path,
 }
 
+
 impl Config {
     pub fn load_from_file(path: &str) -> Result<Config> {
         let file_content = fs::read_to_string(path)?;
@@ -27,7 +28,8 @@ impl Config {
 
 // ? better to use Paths or Strings for reading a file from cold start
 // ? I imagine it would be &str
-// Wrapper for read_to_string
+// Wrapper for read_to_string 
+
 #[allow(dead_code)]
 pub fn get_file_as_string(path: &Path) -> Result<String> {
     Ok(fs::read_to_string(path)?,)
@@ -67,7 +69,7 @@ pub fn get_num_lines(file: File) -> Result<u32> {
         num_lines += 1;
         line.clear();
     }
-
+    
     Ok(num_lines)
 }
 
