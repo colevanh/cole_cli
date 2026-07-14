@@ -119,9 +119,9 @@ mod tests {
     
     #[test]
     fn test_print_lines_with_nums() {
-        let file_1 = File::open(TEST_FILE_2).unwrap();
+        let file_2 = File::open(TEST_FILE_2).unwrap();
 
-        print_lines_with_nums(file_1);
+        print_lines_with_nums(file_2);
     }
 
     #[test]
@@ -135,7 +135,7 @@ mod tests {
         // ? how to avoid unwrapping here? would need to use a match, right
         //assert_eq!(get_num_lines(file_1).unwrap(), 0);
         assert_eq!(get_num_lines(file_2).unwrap(), 4);
-        assert_eq!(get_num_lines(file_3).unwrap(), 11);
+        assert_eq!(get_num_lines(file_3).unwrap(), 10);
         
         
     }

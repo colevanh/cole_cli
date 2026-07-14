@@ -2,11 +2,12 @@
 name = "cole_cli"
 version = "0.1.0"
 edition = "2024"
-
+description = "A multi-usage CLI tool for everyday use."
 
 [[bin]]
 name="cole_cli"
 path = "src/main.rs"
+
 
 [dependencies]
 anyhow = "1.0.103"

@@ -12,13 +12,19 @@ fn works() {
 
 fn run(args: &[&str], expected_file: &str) -> Result<()> {
     let expected = fs::read_to_string(expected_file)?;
+
+    let mut cmd = Command::cargo_bin("cole_cli").unwrap();
+
+    let mut cmd_args = cmd.get_args()
     let output = Command::cargo_bin("cole_cli")?
         .args(args)
         .output()
         .expect("fail");
 
-    let stdout = String::from_utf8(output.stdout)
+    let stdout = String::from_utf8(new_output.stdout)
         .expect("invalid UTF8").trim_end_matches('\n').to_string();
+
+    println!("{}", stdout);
 
     assert_eq!(stdout, expected);
     Ok(())
