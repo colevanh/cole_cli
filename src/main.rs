@@ -7,9 +7,17 @@ use parser::{*};
 
 
 #[derive(Parser, Debug)]
+struct Cli {}
+
+#[derive(Parser, Debug)]
 #[command(version, about, long_about = None)]
 struct Args {
-    #[arg(short = 'i', long = "input", default_value = "-")]
+    #[arg(
+        short = 'i', 
+        long = "input", 
+        default_value = "-",
+        help = "file to be used as input"
+    )]
     input: Option<String>,
 
     #[arg(
@@ -27,7 +35,7 @@ struct Args {
     email: String,
 
     #[command(subcommand)]
-    cmd: Commands
+    cmd: Commands,
 }
 
 
@@ -70,7 +78,5 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         }
     };
 
-    
-   
     Ok(())
 }
