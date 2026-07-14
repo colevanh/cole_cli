@@ -5,6 +5,7 @@ mod parser;
 
 use parser::{*};
 
+
 #[derive(Parser, Debug)]
 #[command(version, about, long_about = None)]
 struct Args {
@@ -41,6 +42,7 @@ enum Commands {
         is_true: bool
     },
     Print,
+    NumLines,
 }
 fn main() -> Result<(), Box<dyn std::error::Error>> {
 
@@ -62,7 +64,11 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         Commands::Get{value} => println!("{value}"),
         Commands::Set{key: _, value: _, is_true: _} => println!("reba"),
         Commands::Print => print_lines_with_nums(input_file),
-    }   
+        Commands::NumLines => {
+            let num_lines = get_num_lines(input_file).unwrap();
+            println!("Number of lines: {}", num_lines);
+        }
+    };
 
     
    

@@ -61,7 +61,6 @@ pub fn get_num_lines(file: File) -> Result<u32> {
 
     loop {
         let line_bytes = my_bufreader.read_line(&mut line)?;
-        println!("{line_bytes} {line}");
         if line_bytes == 0 {
            
             break;

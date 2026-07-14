@@ -1,0 +1,8 @@
+// TODO
+
+1. Implement a "FileInfo" struct that would store info such as:
+    - Line count
+    - Word count
+    - byte count
+
+2. Implement line count as a subcommand via Clap
