@@ -26,7 +26,7 @@ pub fn get_num_lines(file: File) -> Result<u32> {
         num_lines += 1;
         line.clear();
     }
-
+    
     Ok(num_lines)
 }
 
@@ -72,6 +72,14 @@ mod tests {
     const TEST_FILE_2: &str = "./tests/text_files/test_file_2.txt";
     const TEST_FILE_3: &str = "./tests/text_files/test_file_3.txt";
 
+
+    #[test]
+    fn test_open_invalid_file() {
+        let invalid_name: &str = "./tests/text_files/invalid_file.txt";
+        let bad_file = open_file_or_error(invalid_name);
+
+        assert!(bad_file.is_err());
+    }
     #[test]
     fn test_print_lines_with_nums() {
         let file_2 = File::open(TEST_FILE_2).unwrap();
