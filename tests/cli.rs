@@ -54,9 +54,6 @@ fn print_lines_four() -> Result<()> {
     )
 }
 
-// TODO Strip out the two blocks of code dealing with handling stdout
-// TODO and turn them into helper functions!
-// TODO also consider renaming this thing
 #[test]
 fn direct_capture_matches_cli_output() -> Result<()> {
     let input_path = "./tests/text_files/test_file_4.txt";
