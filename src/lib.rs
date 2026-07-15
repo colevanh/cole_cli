@@ -14,6 +14,7 @@ pub fn run() -> Result<(), Box<dyn std::error::Error>> {
     match cli.command {
         Commands::Print => crate::commands::print::run(input)?,
         Commands::NumLines => crate::commands::num_lines::run(input)?,
+        Commands::EnvVars => crate::commands::dir_info::run()?,
     }
 
     Ok(())

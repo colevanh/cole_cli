@@ -3,7 +3,7 @@ use std::fs::File;
 use assert_cmd::Command;
 use anyhow::Result;
 use pretty_assertions::assert_eq;
-use cole_cli::parser::print_lines_with_nums_to_writer;
+use cole_cli::services::file_service::print_lines_with_nums_to_writer;
 
 #[test]
 fn works() {

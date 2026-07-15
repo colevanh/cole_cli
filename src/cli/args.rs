@@ -25,4 +25,5 @@ pub enum Commands {
     Print,
     #[command(about = "Print the number of lines in a file", author = "Cole")]
     NumLines,
+    EnvVars,
 }
