@@ -23,14 +23,16 @@ struct Args {
     #[arg(
         short = 'n', 
         long = "name", 
-        help = "The user's first name"
+        help = "The user's first name",
+        default_value = "test",
     )]
     name: String,
 
     #[arg(
         short = 'e', 
         long = "email", 
-        help = "The user's email address"
+        help = "The user's email address",
+        default_value = "tamra",
     )]
     email: String,
 
@@ -74,7 +76,6 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         Commands::Print => print_lines_with_nums(input_file),
         Commands::NumLines => {
             let num_lines = get_num_lines(input_file).unwrap();
-            println!("Number of lines: {}", num_lines);
         }
     };
 

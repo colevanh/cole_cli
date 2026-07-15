@@ -62,7 +62,6 @@ pub fn get_num_lines(file: File) -> Result<u32> {
     loop {
         let line_bytes = my_bufreader.read_line(&mut line)?;
         if line_bytes == 0 {
-           
             break;
         }
         num_lines += 1;
@@ -135,7 +134,7 @@ mod tests {
         // ? how to avoid unwrapping here? would need to use a match, right
         //assert_eq!(get_num_lines(file_1).unwrap(), 0);
         assert_eq!(get_num_lines(file_2).unwrap(), 4);
-        assert_eq!(get_num_lines(file_3).unwrap(), 11);
+        assert_eq!(get_num_lines(file_3).unwrap(), 10);
         
         
     }

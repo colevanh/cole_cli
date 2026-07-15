@@ -51,7 +51,7 @@ fn print_lines_three() -> Result<()> {
 // TODO also consider renaming this thing
 #[test]
 fn direct_capture_matches_cli_output() -> Result<()> {
-    let input_path = "./tests/text_files/test_file_2.txt";
+    let input_path = "./tests/text_files/test_file_3.txt";
     let expected = fs::read_to_string(input_path)?;
 
     let output = Command::cargo_bin("cole_cli")?
@@ -66,6 +66,7 @@ fn direct_capture_matches_cli_output() -> Result<()> {
 
     let input_file = File::open(input_path)?;
     let mut captured = Vec::new();
+    
     print_lines_with_nums_to_writer(input_file, &mut captured)?;
 
     let direct_stdout = String::from_utf8(captured)?
