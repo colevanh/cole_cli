@@ -31,7 +31,8 @@ fn print_lines_one() -> Result<()> {
         &["--input", "./tests/text_files/test_file_1.txt", "print"], 
         "./tests/text_files/test_file_1.txt"
     )
-}   
+}
+   
 #[test]
 fn print_lines_two() -> Result<()> {
     run(

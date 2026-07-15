@@ -6,3 +6,6 @@
     - byte count
 
 2. Implement line count as a subcommand via Clap
+
+3. Add "stdin" functionality
+    - Allow a user to pipe in raw text

@@ -12,7 +12,6 @@ pub fn nth_word(my_str: &str, x: u32) -> &str {
         if item == b' ' {
             counter += 1;
         
-
             if counter == x - 1 {
                 starting_index = i + 1;
             }
@@ -23,8 +22,8 @@ pub fn nth_word(my_str: &str, x: u32) -> &str {
             }
         }
     }
-
-    &my_str[starting_index..]
+    
+     &my_str[starting_index..]
 }
 
 #[cfg(test)]
@@ -47,5 +46,3 @@ mod tests {
     }
 
 }
-
-

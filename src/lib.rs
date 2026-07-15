@@ -9,9 +9,6 @@ use clap::Parser;
 
 pub fn run() -> Result<(), Box<dyn std::error::Error>> {
     let cli = Cli::parse();
-    let funny_string = "Hey Tamra Get Lost";
-
-    println!("{}", parser::nth_word(funny_string, 4));
     let input = cli.input.as_deref().unwrap_or("-");
 
     match cli.command {

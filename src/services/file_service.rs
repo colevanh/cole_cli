@@ -1,8 +1,9 @@
 use std::fs::{self, File};
-use std::io::{self, BufRead, BufReader, Write};
+use std::io::{self, BufRead, BufReader, Write, ErrorKind};
+use std::io::Error as Err;
 use std::path::Path;
 
-use anyhow::{anyhow, Result};
+use anyhow::{anyhow, Result, Error};
 
 pub fn get_file_as_string(path: &Path) -> Result<String> {
     Ok(fs::read_to_string(path)?)
@@ -26,7 +27,7 @@ pub fn get_num_lines(file: File) -> Result<u32> {
         num_lines += 1;
         line.clear();
     }
-    
+
     Ok(num_lines)
 }
 
@@ -65,7 +66,9 @@ pub fn print_lines_with_nums(file: File) {
 
 #[cfg(test)]
 mod tests {
-    use super::*;
+    use anyhow::Error;
+
+use super::*;
     use std::fs::File;
 
     const TEST_FILE_1: &str = "./tests/text_files/test_file_1.txt";
@@ -76,9 +79,19 @@ mod tests {
     #[test]
     fn test_open_invalid_file() {
         let invalid_name: &str = "./tests/text_files/invalid_file.txt";
-        let bad_file = open_file_or_error(invalid_name);
+        let file_result = open_file_or_error(invalid_name);
 
-        assert!(bad_file.is_err());
+        assert!(file_result.is_err());
+
+        let file_error = file_result.expect_err("tamra");
+        let new_error = Err::new(ErrorKind::InvalidFilename, "invalid!");
+        //assert_eq!(new_error.kind(), file_error.downcast_mut().);
+
+        //let opened_file = match file_result {
+            //Ok(file) => file,
+           // Err(err) => panic!("yooo: {err}"),
+        //};
+
     }
     #[test]
     fn test_print_lines_with_nums() {
