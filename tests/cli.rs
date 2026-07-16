@@ -18,6 +18,7 @@ fn run(args: &[&str], expected_file: &str) -> Result<()> {
         .output()
         .expect("fail");
 
+
     let stdout = String::from_utf8(output.stdout)
         .expect("invalid UTF8").trim_end_matches('\n').to_string();
 
@@ -28,22 +29,22 @@ fn run(args: &[&str], expected_file: &str) -> Result<()> {
 #[test]
 fn print_lines_one() -> Result<()> {
     run(
-        &["--input", "./tests/text_files/test_file_1.txt", "print"], 
+        &["print", "--input", "./tests/text_files/test_file_1.txt"], 
         "./tests/text_files/test_file_1.txt"
     )
 }
-   
+/// Fail on Windows, pass on MacOS
 #[test]
 fn print_lines_two() -> Result<()> {
     run(
-        &["--input", "./tests/text_files/test_file_2.txt", "print"], "./tests/text_files/test_file_2.txt"
+        &["print", "--input", "./tests/text_files/test_file_2.txt"], "./tests/text_files/test_file_2.txt"
     )
 }
-
+/// Fail on Windows, pass on MacOS
 #[test]
 fn print_lines_three() -> Result<()> {
     run(
-        &["--input", "./tests/text_files/test_file_3.txt", "print"], 
+        &["print", "--input", "./tests/text_files/test_file_3.txt"], 
         "./tests/text_files/test_file_3.txt"
     )
 }
@@ -54,7 +55,7 @@ fn direct_capture_matches_cli_output() -> Result<()> {
     let expected = fs::read_to_string(input_path)?;
 
     let output = Command::cargo_bin("cole_cli")?
-        .args(["--input", input_path, "print"])
+        .args(["print", "--input", input_path])
         .output()
         .expect("fail");
 
