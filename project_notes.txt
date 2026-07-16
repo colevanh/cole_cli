@@ -9,3 +9,8 @@
 
 3. Add "stdin" functionality
     - Allow a user to pipe in raw text
+
+4. Implement features/commands that relate to test engineering
+- Generating and managing dummy test users
+- Mocking out data for various test scenarios
+- Reading/writing test fixtures in JSON or YAML format

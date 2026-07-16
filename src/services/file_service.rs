@@ -85,8 +85,9 @@ use super::*;
 
         let file_error = file_result.expect_err("tamra");
         let new_error = Err::new(ErrorKind::InvalidFilename, "invalid!");
+        
+        // TODO how to compare anyhow Error with std::io::Error
         //assert_eq!(new_error.kind(), file_error.downcast_mut().);
-
         //let opened_file = match file_result {
             //Ok(file) => file,
            // Err(err) => panic!("yooo: {err}"),

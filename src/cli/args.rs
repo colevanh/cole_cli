@@ -1,4 +1,4 @@
-use clap::{Parser, Subcommand};
+use clap::{Parser, Subcommand, Args, ValueEnum};
 
 #[derive(Parser, Debug)]
 #[command(version, about, long_about = None)]
@@ -17,6 +17,7 @@ pub struct Cli {
 
     #[command(subcommand)]
     pub command: Commands,
+
 }
 
 #[derive(Subcommand, Debug, Clone)]
