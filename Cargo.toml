@@ -1,8 +1,9 @@
 [package]
 name = "cole_cli"
-version = "0.1.0"
+version = "0.2.0"
 edition = "2024"
-
+description = "A compact, jack-of-all trades command line tool. Because Rust is neat."
+readme = "./README.md"
 
 [[bin]]
 name="cole_cli"
@@ -17,3 +18,6 @@ pretty_assertions = "1.4.1"
 serde = { version = "1.0.228", features = ["derive"] }
 serde_json = "1.0"
 toml = "1.1.2"
+
+[lints.rust]
+warnings = "allow"
