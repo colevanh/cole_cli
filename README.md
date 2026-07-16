@@ -1,9 +1,3 @@
-<style>
-H1{color:Green !important;}
-H2{color:DarkOrange !important;}
-p{color:Black !important;}
-</style>
-
 # This is **cole_cli** (working name), a compact CLI app written in Rust.
 
 
