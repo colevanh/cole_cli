@@ -8,9 +8,6 @@ pub struct Cli {
     #[command(subcommand)]
     pub command: Commands,
 
-    #[arg()]
-    pub my_file: Option<String>,
-
 }
 
 #[derive(Subcommand, Debug)]
@@ -22,6 +19,7 @@ pub enum Commands {
     NumLines(NumLinesArgs),
     /// Provides stats about working environment
     EnvVars(EnvVarsArgs),
+    /// TODO implement the Generate command
     Generate(GenerateArgs),
 }
 
