@@ -1,3 +1,9 @@
+<style>
+H1{color:Green !important;}
+H2{color:DarkOrange !important;}
+p{color:Black !important;}
+</style>
+
 # This is **cole_cli** (working name), a compact CLI app written in Rust.
 
 
@@ -43,3 +49,5 @@ Options:
   -i, --input <INPUT>  file to be used as input [default: -]
   -h, --help           Print help
 ```
+
+$${\color{red}This \space is \space red \space text}$$

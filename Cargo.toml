@@ -3,11 +3,11 @@ name = "cole_cli"
 version = "0.2.0"
 edition = "2024"
 description = "A compact, jack-of-all trades command line tool. Because Rust is neat."
+readme = "./README.md"
 
 [[bin]]
 name="cole_cli"
 path = "src/main.rs"
-
 
 [dependencies]
 anyhow = "1.0.103"
