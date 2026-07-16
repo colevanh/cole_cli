@@ -5,6 +5,7 @@ pub mod parser;
 pub mod services;
 
 use crate::cli::args::{Cli, Commands};
+use anyhow::Error;
 use clap::Parser;
 
 pub fn run() -> Result<(), Box<dyn std::error::Error>> {
@@ -19,6 +20,10 @@ pub fn run() -> Result<(), Box<dyn std::error::Error>> {
         }
         Commands::EnvVars(env_args) => {
             crate::commands::dir_info::run()?;
+        }
+        Commands::Generate(generate_args) => {
+            let dummy_result: Result<(), Error> = Ok(());
+            dummy_result.unwrap()
         }
     };
 
