@@ -66,6 +66,7 @@ fn direct_capture_matches_cli_output() -> Result<()> {
 
     let input_file = File::open(input_path)?;
     let mut captured = Vec::new();
+    
     print_lines_with_nums_to_writer(input_file, &mut captured)?;
 
     let direct_stdout = String::from_utf8(captured)?
