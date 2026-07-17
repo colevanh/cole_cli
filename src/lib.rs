@@ -10,9 +10,10 @@ use crate::cli::args::{Cli, Commands};
 use anyhow::Error;
 use clap::Parser;
 
+/// run() determines which command to run given user input
 pub fn run() -> Result<(), Box<dyn std::error::Error>> {
+    
     let cli = Cli::parse();
-
     match &cli.command {
         Commands::Print(input_args) => {
              crate::commands::print::run(input_args.input.as_ref().unwrap())?;

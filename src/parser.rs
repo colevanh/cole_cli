@@ -26,6 +26,7 @@ pub fn nth_word(my_str: &str, x: u32) -> &str {
      &my_str[starting_index..]
 }
 
+/// test module for the src/parser.rs
 #[cfg(test)]
 mod tests {
     use super::*;
