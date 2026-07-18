@@ -31,9 +31,10 @@ pub fn get_num_lines(file: File) -> Result<u32> {
     Ok(num_lines)
 }
 
-pub fn print_lines_with_nums_to_writer<W: Write + ?Sized>(file: File, writer: &mut W) -> Result<()> {
+pub fn print_lines_to_writer<W: Write + ?Sized>(file: File, writer: &mut W) -> Result<()> {
     let reader = BufReader::new(file);
     let mut lines = reader.lines().peekable();
+    let mut line_number: u32 = 1;
 
     while let Some(line_result) = lines.next() {
         let line = match line_result {
@@ -52,6 +53,38 @@ pub fn print_lines_with_nums_to_writer<W: Write + ?Sized>(file: File, writer: &m
         } else if !rendered.is_empty() {
             write!(writer, "{rendered}")?;
         }
+
+        line_number += 1;
+    }
+
+    writer.flush()?;
+    Ok(())
+}
+
+pub fn print_lines_with_nums_to_writer<W: Write + ?Sized>(file: File, writer: &mut W) -> Result<()> {
+    let reader = BufReader::new(file);
+    let mut lines = reader.lines().peekable();
+    let mut line_number: u32 = 1;
+
+    while let Some(line_result) = lines.next() {
+        let line = match line_result {
+            Ok(good_line) => good_line,
+            Err(_) => return Err(anyhow!("failed to read a line from the input file")),
+        };
+
+        let rendered = line.replace('"', "").trim().to_string();
+
+        if lines.peek().is_some() {
+            if rendered.is_empty() {
+                writeln!(writer, "{line_number}")?;
+            } else {
+                writeln!(writer, "{line_number}: {rendered}")?;
+            }
+        } else if !rendered.is_empty() {
+            write!(writer, "{line_number}: {rendered}")?;
+        }
+
+        line_number += 1;
     }
 
     writer.flush()?;
