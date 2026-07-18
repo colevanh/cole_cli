@@ -3,6 +3,8 @@ use std::io::{self, BufRead, BufReader, Write, ErrorKind};
 use std::io::Error as Err;
 use std::path::Path;
 
+use assert_cmd::Command;
+
 use anyhow::{anyhow, Result, Error};
 
 pub fn get_file_as_string(path: &Path) -> Result<String> {
@@ -76,12 +78,12 @@ pub fn print_lines_with_nums_to_writer<W: Write + ?Sized>(file: File, writer: &m
 
         if lines.peek().is_some() {
             if rendered.is_empty() {
-                writeln!(writer, "{line_number}")?;
+                writeln!(writer, "{line_number}.")?;
             } else {
-                writeln!(writer, "{line_number}: {rendered}")?;
+                writeln!(writer, "{line_number}. {rendered}")?;
             }
         } else if !rendered.is_empty() {
-            write!(writer, "{line_number}: {rendered}")?;
+            write!(writer, "{line_number} {rendered}")?;
         }
 
         line_number += 1;
@@ -106,6 +108,7 @@ use super::*;
 
     const TEST_FILE_1: &str = "./tests/text_files/test_file_1.txt";
     const TEST_FILE_2: &str = "./tests/text_files/test_file_2.txt";
+    const TEST_FILE_2_NUMS: &str = "./tests/text_files/test_file_2_nums.txt";
     const TEST_FILE_3: &str = "./tests/text_files/test_file_3.txt";
 
 
@@ -130,7 +133,19 @@ use super::*;
     #[test]
     fn test_print_lines_with_nums() {
         let file_2 = File::open(TEST_FILE_2).unwrap();
-        print_lines_with_nums(file_2);
+        let expected: String = fs::read_to_string(TEST_FILE_2_NUMS).unwrap();
+
+        let args = &["print", "--input", "./tests/text_files/test_file_2.txt"];
+
+        let output = Command::cargo_bin("cole_cli").unwrap()
+            .args(args)
+            .output()
+            .expect("fail");
+
+        let stdout = String::from_utf8(output.stdout)
+            .expect("invalid UTF8").trim_end_matches('\n').to_string();
+
+        assert_eq!(stdout, expected);
     }
 
     #[test]
