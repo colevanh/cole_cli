@@ -25,8 +25,7 @@ pub fn run() -> Result<(), Box<dyn std::error::Error>> {
             crate::commands::dir_info::run()?;
         }
         Commands::Generate(generate_args) => {
-            let dummy_result: Result<(), Error> = anyhow::Ok(());
-            let generated_email = generate_args.email.as_str();
+            crate::commands::generate::run()?;
         }
     };
 

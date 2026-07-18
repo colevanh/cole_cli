@@ -1,5 +1,4 @@
-use clap::{Parser, Subcommand, Args, ValueEnum};
-use crate::models::testuser::TestUser;
+use clap::{Parser, Subcommand, Args};
 
 /// Top level struct for the application
 /// holds the command enum
