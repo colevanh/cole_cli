@@ -29,8 +29,17 @@ pub enum Commands {
 /// input is the file specified by the user at the command line
 #[derive(Args, Debug)]
 pub struct PrintArgs {
-    #[arg(short = 'i', long = "input", default_value = "-", help = "file to be used as input")]
+    #[arg(
+        short = 'i', long = "input", 
+        default_value = "-", value_name = "FILE(S)", 
+        help = "file to be used as input"
+    )]
     pub input: Option<String>,
+
+    #[arg(
+        short = 'n', long = "nums"
+    )]
+    pub show_line_nums: bool,
 }
 
 /// see PrintArgs comment

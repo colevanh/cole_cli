@@ -83,7 +83,7 @@ pub fn print_lines_with_nums_to_writer<W: Write + ?Sized>(file: File, writer: &m
                 writeln!(writer, "{line_number}. {rendered}")?;
             }
         } else if !rendered.is_empty() {
-            write!(writer, "{line_number} {rendered}")?;
+            write!(writer, "{line_number}. {rendered}")?;
         }
 
         line_number += 1;

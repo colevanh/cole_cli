@@ -16,7 +16,7 @@ pub fn run() -> Result<(), Box<dyn std::error::Error>> {
     let cli = Cli::parse();
     match &cli.command {
         Commands::Print(input_args) => {
-             crate::commands::print::run(input_args.input.as_ref().unwrap())?;
+            crate::commands::print::run(input_args.input.as_ref().unwrap(), input_args.show_line_nums)?;
         }
         Commands::NumLines(numlines_args) => {
             crate::commands::num_lines::run(numlines_args.input.as_ref().unwrap())?;
