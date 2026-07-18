@@ -44,4 +44,4 @@ Options:
   -h, --help           Print help
 ```
 
-$${\color{red}This \space is \space red \space text}$$
+$${\color{red}The \space work \space continues...}$$
