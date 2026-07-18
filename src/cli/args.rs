@@ -1,4 +1,5 @@
 use clap::{Parser, Subcommand, Args, ValueEnum};
+use crate::models::testuser::TestUser;
 
 /// Top level struct for the application
 /// holds the command enum
@@ -9,6 +10,8 @@ pub struct Cli {
     #[command(subcommand)]
     pub command: Commands,
 
+    // #[arg(value_parser = clap::value_parser!(String))]
+    //pub users: Option<Vec<TestUser>>,
 }
 
 /// enum containing all commands available to the application
@@ -32,12 +35,13 @@ pub struct PrintArgs {
     #[arg(
         short = 'i', long = "input", 
         default_value = "-", value_name = "FILE(S)", 
-        help = "file to be used as input"
+        help = "File to be used as input"
     )]
     pub input: Option<String>,
 
     #[arg(
-        short = 'n', long = "nums"
+        short = 'n', long = "nums",
+        help = "Displays line numbers"
     )]
     pub show_line_nums: bool,
 }
@@ -46,7 +50,9 @@ pub struct PrintArgs {
 /// TODO research how input could be defined elsewhere and shared across commands
 #[derive(Args, Debug)]
 pub struct NumLinesArgs {
-    #[arg(short = 'i', long = "input", default_value = "-", help = "file to be used as input")]
+    #[arg(short = 'i', long = "input", 
+    default_value = "-", value_name = "FILE(S)",
+    help = "File to be used as input")]
     pub input: Option<String>,
 }
 

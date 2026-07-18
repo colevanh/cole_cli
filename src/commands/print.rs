@@ -19,6 +19,7 @@ pub fn print_with_nums(file: File, writer: &mut dyn std::io::Write) -> Result<()
     print_lines_with_nums_to_writer(file, writer)
 }
 
+/// the same but adds line numbers
 pub fn print_lines(file: File, writer: &mut dyn std::io::Write) -> Result<(), anyhow::Error> {
     print_lines_to_writer(file, writer)
 }

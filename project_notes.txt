@@ -14,3 +14,6 @@
 - Generating and managing dummy test users
 - Mocking out data for various test scenarios
 - Reading/writing test fixtures in JSON or YAML format
+
+exammple:
+`cole_cli.exe generate --count 6 --format JSON `

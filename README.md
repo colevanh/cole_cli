@@ -1,9 +1,9 @@
-# This is **cole_cli** (working name), a compact CLI app written in Rust.
+# This is **cole_cli** (working name), a compact CLI app written in Rust
 
+## I started writing this as an excuse to learn Rust - because Rust is neat
 
-### I started writing this as an excuse to learn Rust
-```
-A compact, jack-of-all trades command line tool. Because Rust is neat.
+```console
+A compact, jack-of-all trades command line tool.
 
 Usage: cole_cli.exe <COMMAND>
 
@@ -23,18 +23,23 @@ Options:
 
 As of version 0.2.0 the tool is capable of a few commands, `print` and `num-lines`
 Both require an input file passed in. The default value won't suffice.
-### `print` 
-```
+
+### `print`
+
+```console
 Prints contents of file to stdout
 
 Usage: cole_cli.exe print [OPTIONS]
 
 Options:
-  -i, --input <INPUT>  file to be used as input [default: -]
-  -h, --help           Print help
+  -i, --input <FILE(S)>  File to be used as input [default: -]
+  -n, --nums             Displays line numbers
+  -h, --help             Print help
 ```
+
 ### `num-lines`
-```
+
+```console
 Counts the number of lines in file
 
 Usage: cole_cli.exe num-lines [OPTIONS]

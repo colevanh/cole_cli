@@ -63,6 +63,7 @@ pub fn print_lines_to_writer<W: Write + ?Sized>(file: File, writer: &mut W) -> R
     Ok(())
 }
 
+// TODO 
 pub fn print_lines_with_nums_to_writer<W: Write + ?Sized>(file: File, writer: &mut W) -> Result<()> {
     let reader = BufReader::new(file);
     let mut lines = reader.lines().peekable();
