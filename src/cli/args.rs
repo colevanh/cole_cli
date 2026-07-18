@@ -9,8 +9,6 @@ pub struct Cli {
     #[command(subcommand)]
     pub command: Commands,
 
-    // #[arg(value_parser = clap::value_parser!(String))]
-    //pub users: Option<Vec<TestUser>>,
 }
 
 /// enum containing all commands available to the application
@@ -68,6 +66,31 @@ pub struct EnvVarsArgs {
 pub struct GenerateArgs {
     // TODO add args. name, email, age
     // TODO add --count and --format flags
+
+    #[arg(
+        short = 'c', 
+        long = "count", 
+        help = "number of users to generate",
+        default_value = "1",
+    )]
+    pub count: u32,
+
+    #[arg(
+        short = 'f',
+        long = "format",
+        help = "file type",
+        default_value = "json",
+    )]
+    pub format: String,
+
+    #[arg(
+        short = 'o',
+        long = "output",
+        help = "output",
+    )]
+    pub output: Option<String>,
+    // NOTE these fields below are eventually to be tied to wants to manually add 
+    /* 
     #[arg(
         short = 'n', 
         long = "name", 
@@ -83,4 +106,5 @@ pub struct GenerateArgs {
         default_value = "cvh@gmail.com",
     )]
     pub email: String,
+    */
 }

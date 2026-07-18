@@ -19,6 +19,7 @@ rand = "0.10.2"
 serde = { version = "1.0.228", features = ["derive"] }
 serde_json = "1.0"
 toml = "1.1.2"
+fake = "5.1.0"
 
 [lints.rust]
 warnings = "allow"

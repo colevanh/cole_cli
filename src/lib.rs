@@ -25,7 +25,7 @@ pub fn run() -> Result<(), Box<dyn std::error::Error>> {
             crate::commands::dir_info::run()?;
         }
         Commands::Generate(generate_args) => {
-            crate::commands::generate::run()?;
+            crate::commands::generate::run(generate_args.count)?;
         }
     };
 
