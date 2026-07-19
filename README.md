@@ -49,4 +49,18 @@ Options:
   -h, --help           Print help
 ```
 
+### `generate`
+
+```console
+Generates test user(s)
+
+Usage: cole_cli.exe generate [OPTIONS]
+
+Options:
+  -c, --count <COUNT>    number of users to generate [default: 1]
+  -f, --format <FORMAT>  file type [default: json]
+  -o, --output <OUTPUT>  output
+  -h, --help             Print help
+```
+
 $${\color{red}The \space work \space continues...}$$
