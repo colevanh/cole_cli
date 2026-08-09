@@ -149,8 +149,9 @@ use super::*;
     const FIRST_NAMES: [&str;3] = ["Mark", "Stephanie", "Reba"];
     const LAST_NAMES: [&str;3] = ["Smith", "Pinkbottom", "VanHoogenstyn"];
 
+    /// Tests default TestUser construction via TestUserBuilder
     #[test]
-    fn test_user_builder_minimum() {
+    fn test_user_builder_no_optional_fields() {
         let first_name = FIRST_NAMES[0].to_string();
         let last_name: String = LAST_NAMES[0].to_string();
         let new_user: TestUser = TestUserBuilder
@@ -160,6 +161,19 @@ use super::*;
         assert_eq!(None, new_user.age);
         assert_eq!(None, new_user.uuid);
         assert_eq!(None, new_user.phone_number);
+    }
+
+    /// Tests TestUser's age via TestUserBuilder usage
+    #[test]
+    fn test_user_builder_with_age() {
+        let first_name: String = FIRST_NAMES[1].to_string();
+        let last_name: String = LAST_NAMES[1].to_string();
+        let new_user: TestUser = TestUserBuilder
+            ::new(&first_name, &last_name, "test_email&gmail.com")
+            .age(35)
+            .build();
+
+        assert_eq!(35, new_user.age.unwrap());
     }
 
 }
