@@ -17,3 +17,8 @@
 
 exammple:
 `cole_cli.exe generate --count 6 --format JSON `
+
+// RANDOM SCRATCH
+
+1. when writing tests for TestUser.rs, what do we want to focus in on?
+    - 

@@ -6,7 +6,7 @@ use serde_json::Result as SJResult;
 use uuid::Uuid;
 
 // TODO
-// fields to add: phone_number, username, address, created_at, is_active
+// fields to add: username, address, created_at, is_active
 // * structs should use the String owned type rather than the &str slice type
 // * we want each instance of this struct to own all its data.
 #[derive(Debug, Default, Clone, Serialize, Deserialize)]
@@ -148,6 +148,31 @@ use super::*;
 
     const FIRST_NAMES: [&str;3] = ["Mark", "Stephanie", "Reba"];
     const LAST_NAMES: [&str;3] = ["Smith", "Pinkbottom", "VanHoogenstyn"];
+    const TEST_EMAIL: &str = "test_email@gmail.com";
+
+    fn build_mark_smith() -> TestUser {
+        let new_user: TestUser = TestUserBuilder
+            ::new(FIRST_NAMES[0], LAST_NAMES[0], TEST_EMAIL)
+            .build();
+
+        new_user
+    }
+
+    fn build_steph_pink() -> TestUser {
+        let new_user: TestUser = TestUserBuilder
+            ::new(FIRST_NAMES[1], LAST_NAMES[1], TEST_EMAIL)
+            .build();
+
+        new_user
+    }
+
+    fn build_reba_van() -> TestUser {
+        let new_user: TestUser = TestUserBuilder
+            ::new(FIRST_NAMES[2], LAST_NAMES[2], TEST_EMAIL)
+            .build();
+
+        new_user
+    }
 
     /// Tests default TestUser construction via TestUserBuilder
     #[test]
@@ -174,6 +199,17 @@ use super::*;
             .build();
 
         assert_eq!(35, new_user.age.unwrap());
+    }
+
+    #[test]
+    fn test_full_name() {
+        let test_user_1 = build_mark_smith();
+        let test_user_2 = build_steph_pink();
+        let test_user_3: TestUser = build_reba_van();
+
+        assert_eq!("Mark Smith", test_user_1.get_full_name());
+        assert_eq!("Stephanie Pinkbottom", test_user_2.get_full_name());
+        assert_eq!("Reba VanHoogenstyn", test_user_3.get_full_name());
     }
 
 }
