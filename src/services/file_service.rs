@@ -1,3 +1,10 @@
+/*
+
+* file_service.rs
+* File used for opening files, performing operations on files, etc
+
+*/
+
 use std::fs::{self, File};
 use std::io::{self, BufRead, BufReader, Write, ErrorKind};
 use std::io::Error as Err;
@@ -7,15 +14,21 @@ use assert_cmd::Command;
 
 use anyhow::{anyhow, Result, Error};
 
+/// Return File as a String (Result type)
 pub fn get_file_as_string(path: &Path) -> Result<String> {
     Ok(fs::read_to_string(path)?)
 }
 
+/// Return File or Error
 pub fn open_file_or_error(file_name: &str) -> Result<File> {
     let file_path = Path::new(file_name);
     Ok(File::open(file_path)?)
 }
 
+/// Returns the number of lines in a file
+/// Result type: number of lines or Error
+/// ? would returning a Some type be the better option?
+/// * either zero or a number [1..n]
 pub fn get_num_lines(file: File) -> Result<u32> {
     let mut reader = BufReader::new(file);
     let mut num_lines = 0_u32;

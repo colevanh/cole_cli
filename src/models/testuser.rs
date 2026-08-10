@@ -11,17 +11,19 @@ use uuid::Uuid;
 // * we want each instance of this struct to own all its data.
 #[derive(Debug, Default, Clone, Serialize, Deserialize)]
 pub struct TestUser {
-    pub first_name: String,
-    pub last_name: String,
-    pub email: String,
-    pub role: UserRole,
-    pub age: Option<u32>,
-    pub phone_number: Option<String>,   
-    pub uuid: Option<u128>,
+    pub first_name: String,             // First name (required)
+    pub last_name: String,             // Last name (required)
+    pub email: String,                 // User email (required)
+    pub role: UserRole,                // UserRole value (required)
+    pub age: Option<u32>,              // User age (optional)
+    pub phone_number: Option<String>,  // User phone number (optional)
+    pub uuid: Option<u128>,            // User uuid (optional)
 }
 
 impl TestUser {
     
+    /// Get user's full name
+    /// Concats and returns first + last name
     pub fn get_full_name(&self) -> String {
         let first_name_copy = &self.first_name;
         let last_name_copy = &self.last_name;
@@ -29,7 +31,9 @@ impl TestUser {
     }
 }
 
+/// Builder struct used to create TestUser objects
 pub struct TestUserBuilder {
+    /// * See TestUser field comments for info
     pub first_name: String,
     pub last_name: String,
     pub email: String,
@@ -43,10 +47,10 @@ impl TestUserBuilder {
     // Builder constructor - only mandatory fields required
     pub fn new(first_name: &str, last_name: &str, email: &str) -> Self {
         TestUserBuilder { 
-            first_name: first_name.to_string(),
-            last_name: last_name.to_string(), 
-            email: email.to_string(), 
-            role: UserRole::Standard, 
+            first_name: first_name.to_string(), // to_string() for ownership
+            last_name: last_name.to_string(), // to_string() for ownership
+            email: email.to_string(),         // to_string() for ownership
+            role: UserRole::Standard,         // default UserRole type
             age: None, 
             phone_number: None, 
             uuid: None 

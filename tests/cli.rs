@@ -7,11 +7,6 @@ use anyhow::Result;
 use pretty_assertions::assert_eq;
 use cole_cli::services::file_service::print_lines_to_writer;
 
-#[test]
-fn works() {
-    assert!(true)
-}
-
 fn run(args: &[&str], expected_file: &str) -> Result<()> {
     let expected = fs::read_to_string(expected_file)?;
 
@@ -29,6 +24,7 @@ fn run(args: &[&str], expected_file: &str) -> Result<()> {
     Ok(())
 }
 
+/// Fails on Windows, passes on MacOS
 #[test]
 fn print_lines_one() -> Result<()> {
     run(
@@ -36,6 +32,7 @@ fn print_lines_one() -> Result<()> {
         "./tests/inputs/text_files/test_file_1.txt"
     )
 }
+
 /// Fail on Windows, pass on MacOS
 #[test]
 fn print_lines_two() -> Result<()> {
@@ -44,6 +41,7 @@ fn print_lines_two() -> Result<()> {
         "./tests/inputs/text_files/test_file_2.txt"
     )
 }
+
 /// Fail on Windows, pass on MacOS
 #[test]
 fn print_lines_three() -> Result<()> {
